@@ -33,22 +33,29 @@
 	</script>
 
 	<script type="text/x-handlebars" id="products">
-		<h1>Products</h1>
-		<h2>There are {{productsCount}} products in stock</h2>
 		<ul class="product-list">
 		{{#each model}}
 			<li class="product">
-				<div class="product__image">
-					<img {{bind-attr src='image'}} alt='flint'>
-				</div><!--
-				--><div class="product__description">
-					<h3 class="product__heading">{{name}}</h3>
-					<p>{{description}}</p>
-					<button type="button">Buy for ${{price}}</button>
-				</div>
+				{{#link-to 'product' this classNames='list-group-item'}}{{title}}{{/link-to}}
 			</li>
 		{{/each}}
-		</ul>
+		</ul><!--
+		--><div class="product-detail">{{outlet}}</div>
+	</script>
+
+	<script type='text/x-handlebars' data-template-name='products/index'>
+		<p class='text-muted'>Choose a product from those on the left!</p>
+	</script>
+
+	<script type='text/x-handlebars' data-template-name='product'>
+		<div class="product__description">
+			<h2 class="product__heading">{{title}}</h2>
+			<p>{{description}}</p>
+			<button type="button">Buy for ${{price}}</button>
+		</div><!--
+		--><div class="product__image">
+			<img {{bind-attr src='image'}} {{bind-attr alt='title'}}>
+		</div>
 	</script>
 
 	<script src="js/libs/jquery-1.10.2.js"></script>

@@ -2,33 +2,39 @@ App = Ember.Application.create();
 
 App.PRODUCTS = [
 	{
-		name: 'Flint',
+		title: 'Flint',
 		price: 20,
+		isOnSale: true,
 		description: 'But you seem to be kicking my seat. Pardon me, sir. Would you mind? Sure thing, pal. Sir? Who threw that? Sir, I challenge you to fisticuffs. Oh, I\'m boned.',
 		image: 'images/flint.png'
 	}, {
-		name: 'Birch',
+		title: 'Birch',
 		price: 120,
+		isOnSale: true,
 		description: 'But you seem to be kicking my seat. Pardon me, sir. Would you mind? Sure thing, pal. Sir? Who threw that? Sir, I challenge you to fisticuffs. Oh, I\'m boned.',
 		image: 'images/birch.png'
 	}, {
-		name: 'Bow Drill',
+		title: 'Bow Drill',
 		price: 140,
+		isOnSale: true,
 		description: 'But you seem to be kicking my seat. Pardon me, sir. Would you mind? Sure thing, pal. Sir? Who threw that? Sir, I challenge you to fisticuffs. Oh, I\'m boned.',
 		image: 'images/bow-drill.png'
 	}, {
-		name: 'Kindling',
+		title: 'Kindling',
 		price: 10,
+		isOnSale: true,
 		description: 'But you seem to be kicking my seat. Pardon me, sir. Would you mind? Sure thing, pal. Sir? Who threw that? Sir, I challenge you to fisticuffs. Oh, I\'m boned.',
 		image: 'images/kindling.png'
 	}, {
-		name: 'Matches',
+		title: 'Matches',
 		price: 30,
+		isOnSale: true,
 		description: 'But you seem to be kicking my seat. Pardon me, sir. Would you mind? Sure thing, pal. Sir? Who threw that? Sir, I challenge you to fisticuffs. Oh, I\'m boned.',
 		image: 'images/matches.png'
 	}, {
-		name: 'Tinder',
+		title: 'Tinder',
 		price: 50,
+		isOnSale: true,
 		description: 'But you seem to be kicking my seat. Pardon me, sir. Would you mind? Sure thing, pal. Sir? Who threw that? Sir, I challenge you to fisticuffs. Oh, I\'m boned.',
 		image: 'images/tinder.png'
 	}
@@ -37,7 +43,10 @@ App.PRODUCTS = [
 App.Router.map(function() {
 	this.route('about');
 	this.route('credits');
-	this.resource('products');
+	this.resource('products', function() {
+		this.resource('product', {path: '/:title'});
+	});
+	
 });
 
 App.IndexController = Ember.Controller.extend({
@@ -47,13 +56,14 @@ App.IndexController = Ember.Controller.extend({
 });
 
 App.ProductsRoute = Ember.Route.extend({
-	model: function() {
+	model: function(params) {
+		console.log(params);
 		return App.PRODUCTS;
 	}
 });
 
-App.ProductsController = Ember.Controller.extend({
-	// productsCount: function() {
-	// 	return this.products.length;
-	// }.property()
+App.ProductRoute = Ember.Route.extend({
+	model: function(params) {
+		return App.PRODUCTS.findBy('title', params.title);
+	}
 });
