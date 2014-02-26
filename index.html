@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Ember Starter Kit</title>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<script type="text/x-handlebars">
+		<header>
+			<nav>
+				{{#link-to 'index' class='navbar-brand' }}<img src="images/logo.png" alt="">{{/link-to}}
+				<ul>
+					{{#link-to 'index' tagName='li' }}Home{{/link-to}}<!--
+					-->{{#link-to 'about' tagName='li' }}About{{/link-to}}<!--
+					-->{{#link-to 'products' tagName='li' }}Products{{/link-to}}
+				</ul>
+			</nav>
+		</header>
+		<div id="main">
+			{{outlet}}
+		</div>
+	</script>
+
+	<script type="text/x-handlebars" id="index">
+		<h1>Welcome to The Flint & Flame</h1>
+		<h2>The current time is {{time}}</h2>
+	</script>
+
+	<script type="text/x-handlebars" id="about">
+		<h1>About The Flint & Flame</h1>
+	</script>
+
+	<script type="text/x-handlebars" id="products">
+		<h1>Products</h1>
+		<h2>There are {{productsCount}} products in stock</h2>
+		<ul class="product-list">
+		{{#each model}}
+			<li class="product">
+				<div class="product__image">
+					<img {{bind-attr src='image'}} alt='flint'>
+				</div><!--
+				--><div class="product__description">
+					<h3 class="product__heading">{{name}}</h3>
+					<p>{{description}}</p>
+					<button type="button">Buy for ${{price}}</button>
+				</div>
+			</li>
+		{{/each}}
+		</ul>
+	</script>
+
+	<script src="js/libs/jquery-1.10.2.js"></script>
+	<script src="js/libs/handlebars-1.1.2.js"></script>
+	<script src="js/libs/ember-1.4.0.js"></script>
+	<script src="js/app.js"></script>
+	<!-- to activate the test runner, add the "?test" query string parameter -->
+	<script src="tests/runner.js"></script>
+</body>
+</html>
