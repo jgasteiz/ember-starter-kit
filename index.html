@@ -52,6 +52,16 @@
 			<h2 class="product__heading">{{title}}</h2>
 			<p>{{description}}</p>
 			<button type="button">Buy for ${{price}}</button>
+			<h3>Reviews</h3>
+			<ul>
+				{{#each reviews}}
+				<li>{{text}}</li>
+				{{else}}
+				<li>
+					<p><em>No reviews yet. Be the first to write one!</em></p>
+				</li>
+				{{/each}}
+			</ul>
 		</div><!--
 		--><div class="product__image">
 			<img {{bind-attr src='image'}} {{bind-attr alt='title'}}>
@@ -61,6 +71,7 @@
 	<script src="js/libs/jquery-1.10.2.js"></script>
 	<script src="js/libs/handlebars-1.1.2.js"></script>
 	<script src="js/libs/ember-1.4.0.js"></script>
+	<script src="js/libs/ember-data-1.0.0.js"></script>
 	<script src="js/app.js"></script>
 	<!-- to activate the test runner, add the "?test" query string parameter -->
 	<script src="tests/runner.js"></script>
