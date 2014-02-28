@@ -23,18 +23,19 @@
 		</div>
 	</script>
 
-	<script type="text/x-handlebars" id="index">
+	<script type="text/x-handlebars" data-template-name="index">
 		<h1>Welcome to The Flint & Flame</h1>
 		<h2>The current time is {{time}}</h2>
+		{{#link-to 'products' class='btn btn--orange' type='button' }}Browse all {{productsCount}} items{{/link-to}}
 	</script>
 
-	<script type="text/x-handlebars" id="about">
+	<script type="text/x-handlebars" data-template-name="about">
 		<h1>About The Flint & Flame</h1>
 	</script>
 
-	<script type="text/x-handlebars" id="products">
+	<script type="text/x-handlebars" data-template-name="products">
 		<ul class="product-list">
-		{{#each model}}
+		{{#each}}
 			<li class="product">
 				{{#link-to 'product' this classNames='list-group-item'}}{{title}}{{/link-to}}
 			</li>
@@ -43,15 +44,15 @@
 		--><div class="product-detail">{{outlet}}</div>
 	</script>
 
-	<script type='text/x-handlebars' data-template-name='products/index'>
+	<script type="text/x-handlebars" data-template-name="products/index">
 		<p class='text-muted'>Choose a product from those on the left!</p>
 	</script>
 
-	<script type='text/x-handlebars' data-template-name='product'>
+	<script type="text/x-handlebars" data-template-name="product">
 		<div class="product__description">
 			<h2 class="product__heading">{{title}}</h2>
 			<p>{{description}}</p>
-			<button type="button">Buy for ${{price}}</button>
+			<button type="button" class="btn btn--green">Buy for ${{price}}</button>
 			<h3>Reviews</h3>
 			<ul>
 				{{#each reviews}}

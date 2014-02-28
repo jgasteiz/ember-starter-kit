@@ -11,10 +11,8 @@ body {
 img {
 	max-width: 100%;
 }
-button {
+.btn {
 	color: #FFF;
-	background-color: #50915A;
-	border-color: #407347;
 	display: inline-block;
 	font-weight: normal;
 	cursor: pointer;
@@ -29,6 +27,15 @@ button {
 	-ms-user-select: none;
 	-o-user-select: none;
 	user-select: none;
+	text-decoration: none;
+}
+.btn--green {
+	background-color: #50915A;
+	border-color: #407347;
+}
+.btn--orange {
+	background-color: #E87714;
+	border-color: #d86704;
 }
 header {
 	background-color: #826258;

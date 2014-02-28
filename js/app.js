@@ -1,6 +1,38 @@
 App = Ember.Application.create();
 
-// App.ApplicationAdapter = DS.RESTAdapter.extend();
+App.Router.map(function() {
+	this.route('about');
+	this.route('credits');
+	this.resource('products', function() {
+		this.resource('product', {path: '/:product_id'});
+	});
+});
+
+
+// Index
+App.IndexRoute = Ember.Route.extend({
+	model: function() {
+		return this.store.findAll('product');
+	}
+});
+App.IndexController = Ember.ArrayController.extend({
+	productsCount: Ember.computed.alias('length'),
+	time: function() {
+		return (new Date()).toDateString();
+	}.property()
+});
+
+// Products
+App.ProductsRoute = Ember.Route.extend({
+	model: function() {
+		return this.store.findAll('product');
+	}
+});
+App.ProductsController = Ember.ArrayController.extend({
+	sortProperties: ['title']
+});
+
+
 App.ApplicationAdapter = DS.FixtureAdapter.extend();
 
 App.Product = DS.Model.extend({
@@ -76,25 +108,3 @@ App.Review.FIXTURES = [
 		text: 'Not the brightest flame, but warm!'
 	}
 ];
-
-App.Router.map(function() {
-	this.route('about');
-	this.route('credits');
-	this.resource('products', function() {
-		this.resource('product', {path: '/:product_id'});
-	});
-	
-});
-
-App.IndexController = Ember.Controller.extend({
-	time: function() {
-		return (new Date()).toDateString();
-	}.property()
-});
-
-App.ProductsRoute = Ember.Route.extend({
-	model: function(params) {
-		console.log(params);
-		return this.store.findAll('Product');
-	}
-});
