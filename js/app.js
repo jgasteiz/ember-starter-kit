@@ -50,6 +50,12 @@ App.ProductOnsaleComponent = Ember.Component.extend({
 	}.property('reviewsCount')
 });
 
+// Reviews
+App.ReviewsController = Ember.ArrayController.extend({
+	sortProperties: ['reviewedAt'],
+	sortAscending: false
+});
+
 
 App.ApplicationAdapter = DS.FixtureAdapter.extend();
 
