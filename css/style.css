@@ -20,11 +20,11 @@ h1 {
 }
 h2 {
 	font-size: 2.5em;
-	margin: 0 0 20px;
+	margin: 20px 0;
 }
 h3 {
 	font-size: 2em;
-	margin: 0 0 15px;
+	margin: 15px 0;
 }
 #main {
 	margin-top: 20px;
@@ -41,21 +41,14 @@ h3 {
 	margin: 0 !important;
 	padding: 8px 0;
 }
-nav ul {
-	margin: 0;
-	padding: 0;
-	text-align: right;
-}
-nav li {
+.navbar-nav>li {
 	background-color: #824D3D;
 	color: #FFF;
 	cursor: pointer;
-	display: inline-block;
 	line-height: 50px;
 	padding: 0 10px;
-	text-decoration: none;
 }
-nav li:hover {
+.navbar-nav>li:hover {
 	background-color: #E87714;
 }
 
@@ -71,9 +64,6 @@ nav li:hover {
 /**
  * Product list
  */
-.product-list {
-	list-style: none;
-}
 .product-link {
 	background: #FFF;
 	color: #222;
@@ -90,6 +80,14 @@ nav li:hover {
 /**
  * Product detail
  */
-.product-detail__image {
-	padding-top: 20px;
+.product-onsale {
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+.product-details {
+	margin-bottom: 40px;
+	margin-top: 40px;
+}
+.product-details__heading {
+	margin-top: 0;
 }

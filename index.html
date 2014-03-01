@@ -13,18 +13,15 @@
 			<nav class="navbar navbar-fixed-top">
 				<div class="container">
 					{{#link-to 'index' class='navbar-brand' }}<img src="images/logo.png" alt="">{{/link-to}}
-					<ul class="navbar-right">
-						{{#link-to 'index' tagName='li' }}Home{{/link-to}}<!--
-						-->{{#link-to 'about' tagName='li' }}About{{/link-to}}<!--
-						-->{{#link-to 'products' tagName='li' }}Products{{/link-to}}
+					<ul class="nav navbar-nav navbar-right">
+						{{#link-to 'index' tagName='li' }}Home{{/link-to}}
+						{{#link-to 'about' tagName='li' }}About{{/link-to}}
+						{{#link-to 'products' tagName='li' }}Products{{/link-to}}
 					</ul>
 				</div>
 			</nav>
 		</header>
-		<div id="main" class="container">
-
-			{{outlet}}
-		</div>
+		<div id="main" class="container">{{outlet}}</div>
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="index">
@@ -33,14 +30,8 @@
 		<h2>Products on Sale</h2>
 		<div class="row">
 		{{#each onSale}}
-			<div class="col-md-4">
-				<img {{bind-attr src='image'}} class="product--on-sale__image">
-				<h2 class="product__heading">{{title}}</h2>
-				<span class="label label-warning">
-				{{#link-to 'products.onsale'}}On Sale{{/link-to}}
-				</span>
-				<p>{{description}}</p>
-				<p>{{#link-to 'product' this class='btn btn-success'}}Buy for ${{price}}{{/link-to}}</p>
+			<div class="col-sm-4">
+				{{product-onsale product=this}}
 			</div>
 		{{/each}}
 		</div>
@@ -52,17 +43,13 @@
 
 	<script type="text/x-handlebars" data-template-name="products">
 		<div class="row">
-			<ul class="product-list col-md-2">
+			<ul class="list-unstyled col-md-2">
 			{{#each}}
-				<li class="product">
-					{{#link-to 'product' this classNames='product-link'}}{{title}}{{/link-to}}
-				</li>
+				<li>{{#link-to 'product' this classNames='product-link'}}{{title}}{{/link-to}}</li>
 			{{/each}}
-				<li class="product">
-					{{#link-to 'products.onsale' classNames='product-link'}}On Sale{{/link-to}}
-				</li>
+				<li>{{#link-to 'products.onsale' classNames='product-link'}}On Sale{{/link-to}}</li>
 			</ul>
-			<div class="product-detail col-md-10">{{outlet}}</div>
+			<div class="col-md-10">{{outlet}}</div>
 		</div>
 	</script>
 
@@ -74,14 +61,7 @@
 		<h1>On sale products</h1>
 		<ul class="list-unstyled">
 			{{#each}}
-			<li class="row">
-				<img {{bind-attr src='image' alt='title'}} class="col-sm-3">
-				<div class="col-sm-9">
-					<h2 class="product__heading">{{title}}</h2>
-					<p>{{description}}</p>
-					<p>{{#link-to 'product' this class='btn btn-success'}}Buy for ${{price}}{{/link-to}}</p>
-				</div>
-			</li>
+				{{product-details product=this tagName='li'}}
 			{{else}}
 			<li class="row">
 				<p><em>No products on sale</em></p>
@@ -91,25 +71,45 @@
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="product">
-		<div class="row">
-			<div class="col-sm-8 product__description">
-				<h2 class="product__heading">{{title}}</h2>
-				<p>{{description}}</p>
-				<p><button type="button" class="btn btn-success">Buy for ${{price}}</button></p>
-				<h3>Reviews</h3>
-				<ul>
-					{{#each reviews}}
-					<li>{{text}}</li>
-					{{else}}
-					<li>
-						<p><em>No reviews yet. Be the first to write one!</em></p>
-					</li>
-					{{/each}}
-				</ul>
-			</div>
-			<div class="col-sm-4 product-detail__image">
-				<img {{bind-attr src='image'}} {{bind-attr alt='title'}}>
-			</div>
+		{{product-details product=this}}
+	</script>
+
+	<!-- Components -->
+	<script type="text/x-handlebars" data-template-name="components/product-onsale">
+		<img {{bind-attr src='product.image' alt='product.title'}} class="col-sm-4">
+		<div class="col-sm-8">
+			<h2>{{product.title}}</h2>
+			<p>
+				<span class="label label-warning">{{#link-to 'products.onsale'}}On Sale{{/link-to}}</span>
+			</p>
+			<p>{{product.description}}</p>
+			<p>{{#link-to 'product' product class='btn btn-success'}}Buy for ${{product.price}}{{/link-to}}</p>
+			{{#if hasReviews}}
+				<p class='text-muted'>
+					{{#link-to 'product' product }}Read all reviews ({{reviewsCount}}){{/link-to}}
+				</p>
+			{{/if}}
+		</div>
+	</script>
+
+	<script type="text/x-handlebars" data-template-name="components/product-details">
+		<div class="col-sm-8">
+			<h2 class="product-details__heading">{{product.title}}</h2>
+			<p>{{product.description}}</p>
+			<p><button type="button" class="btn btn-success">Buy for ${{product.price}}</button></p>
+			<h3>Reviews</h3>
+			<ul>
+				{{#each product.reviews}}
+				<li>{{text}}</li>
+				{{else}}
+				<li>
+					<p><em>No reviews yet. Be the first to write one!</em></p>
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+		<div class="col-sm-4">
+			<img {{bind-attr src='product.image' alt='product.title'}}>
 		</div>
 	</script>
 

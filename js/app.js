@@ -37,6 +37,18 @@ App.ProductsOnsaleRoute = Ember.Route.extend({
 App.ProductsController = Ember.ArrayController.extend({
 	sortProperties: ['title']
 });
+App.ProductView = Ember.View.extend({
+	classNames: ['row'],
+	classNameBindings: ['isOnSale'],
+	isOnSale: Ember.computed.alias('controller.isOnSale')
+});
+App.ProductOnsaleComponent = Ember.Component.extend({
+	classNames: ['row', 'product-onsale'],
+	reviewsCount: Ember.computed.alias('product.reviews.length'),
+	hasReviews: function() {
+		return this.get('reviewsCount') > 0;
+	}.property('reviewsCount')
+});
 
 
 App.ApplicationAdapter = DS.FixtureAdapter.extend();
