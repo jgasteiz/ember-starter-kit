@@ -5,6 +5,7 @@ App.Router.map(function() {
 	this.route('credits');
 	this.resource('products', function() {
 		this.resource('product', {path: '/:product_id'});
+		this.route('onsale');
 	});
 });
 
@@ -17,15 +18,20 @@ App.IndexRoute = Ember.Route.extend({
 });
 App.IndexController = Ember.ArrayController.extend({
 	productsCount: Ember.computed.alias('length'),
-	time: function() {
-		return (new Date()).toDateString();
-	}.property()
+	onSale: function() {
+		return this.filterBy('isOnSale').slice(0, 3);
+	}.property('@each.isOnSale')
 });
 
 // Products
 App.ProductsRoute = Ember.Route.extend({
 	model: function() {
 		return this.store.findAll('product');
+	}
+});
+App.ProductsOnsaleRoute = Ember.Route.extend({
+	model: function() {
+		return this.modelFor('products').filterBy('isOnSale');
 	}
 });
 App.ProductsController = Ember.ArrayController.extend({
@@ -63,22 +69,22 @@ App.Product.FIXTURES = [
 		id: 2,
 		title: 'Birch',
 		price: 120,
-		isOnSale: true,
 		description: 'But you seem to be kicking my seat. Pardon me, sir. Would you mind? Sure thing, pal. Sir? Who threw that? Sir, I challenge you to fisticuffs. Oh, I\'m boned.',
+		isOnSale: false,
 		image: 'images/birch.png'
 	}, {
 		id: 3,
 		title: 'Bow Drill',
 		price: 140,
 		description: 'But you seem to be kicking my seat. Pardon me, sir. Would you mind? Sure thing, pal. Sir? Who threw that? Sir, I challenge you to fisticuffs. Oh, I\'m boned.',
-		isOnSale: true,
+		isOnSale: false,
 		image: 'images/bow-drill.png'
 	}, {
 		id: 4,
 		title: 'Kindling',
 		price: 10,
 		description: 'But you seem to be kicking my seat. Pardon me, sir. Would you mind? Sure thing, pal. Sir? Who threw that? Sir, I challenge you to fisticuffs. Oh, I\'m boned.',
-		isOnSale: true,
+		isOnSale: false,
 		image: 'images/kindling.png'
 	}, {
 		id: 5,

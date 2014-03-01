@@ -1,9 +1,12 @@
-html {
-	padding: 20px;
-}
+/**
+ * Base styles.
+ */
 body {
 	background-color: #F0EEE1;
 	color: #222;
+	font-size: 16px;
+	padding-bottom: 20px;
+	padding-top: 50px;
 }
 * {
 	box-sizing: border-box;
@@ -11,46 +14,32 @@ body {
 img {
 	max-width: 100%;
 }
-.btn {
-	color: #FFF;
-	display: inline-block;
-	font-weight: normal;
-	cursor: pointer;
-	border: 1px solid rgba(0, 0, 0, 0);
-	white-space: nowrap;
-	padding: 6px 12px;
-	font-size: 14px;
-	line-height: 1.428571429;
-	border-radius: 4px;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
-	user-select: none;
-	text-decoration: none;
+h1 {
+	font-size: 3em;
+	margin: 0 0 40px;
 }
-.btn--green {
-	background-color: #50915A;
-	border-color: #407347;
+h2 {
+	font-size: 2.5em;
+	margin: 0 0 20px;
 }
-.btn--orange {
-	background-color: #E87714;
-	border-color: #d86704;
+h3 {
+	font-size: 2em;
+	margin: 0 0 15px;
 }
-header {
+#main {
+	margin-top: 20px;
+}
+
+/**
+ * Header.
+ */
+.navbar {
 	background-color: #826258;
-	margin: -20px -20px 0 -20px;
+	border: none;
 }
-nav {
-	margin: 0 auto;
-	max-width: 900px;
-	position: relative;
-}
-nav .navbar-brand {
-	left: 0;
-	height: 50px;
+.navbar-brand {
+	margin: 0 !important;
 	padding: 8px 0;
-	position: absolute;
 }
 nav ul {
 	margin: 0;
@@ -70,59 +59,37 @@ nav li:hover {
 	background-color: #E87714;
 }
 
-#main {
-	margin: 40px auto;
-	max-width: 900px;
+/**
+ * Index page.
+ */
+.product--on-sale {
+	width: 33.333%;
+	display: inline-block;
+	padding: 20px;
 }
 
 /**
  * Product list
  */
 .product-list {
-	background-color: #fff;
-	border-radius: 4px;
-	box-shadow: 0 2px 0px #BBB;
-	display: inline-block;
-	margin: 0;
-	padding: 0;
-	vertical-align: top;
-	width: 20%;
+	list-style: none;
 }
-.product {
-	display: block;
-	margin: 0;
-}
-.product a {
+.product-link {
+	background: #FFF;
 	color: #222;
 	display: block;
 	padding: 10px 15px;
 	text-decoration: none;
 }
-.product a:hover {
+.product-link:hover,
+.product-link.active {
 	color: #E87714;
+	text-decoration: none;
 }
 
 /**
  * Product detail
  */
-.product-detail {
-	display: inline-block;
-	vertical-align: top;
-	padding-left: 40px;
-	width: 80%;
-}
-.product__description {
-	display: inline-block;
-	vertical-align: top;
-	width: 55%;
-}
-.product__heading {
-	font-size: 32px;
-	margin-top: 0;
-}
-.product__image {
-	display: inline-block;
-	padding: 0 0 0 40px;
-	vertical-align: top;
-	width: 45%;
+.product-detail__image {
+	padding-top: 20px;
 }
